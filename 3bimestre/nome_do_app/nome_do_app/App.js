@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#17181F',
     borderRadius: 12,
     padding: 18,
-    margin: 8, // Substituído o gap por margin para evitar tela branca
+    margin: 8,
     minWidth: 260,
     maxWidth: 320,
     borderWidth: 1,
