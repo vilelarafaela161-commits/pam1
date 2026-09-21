@@ -1,20 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
-
       <ScrollView contentContainerStyle={styles.content}>
-        <Text style={styles.mainTitle}>Estrofes & Letras</Text>
+        
+        <Text style={styles.title}>Slow Jamz</Text>
 
-        {/* --- PRIMEIRA MÚSICA: Sad Girl --- */}
+        {/* Sad Girl */}
         <Text style={styles.songTitle}>Sad Girl — Lana Del Rey</Text>
-        <View style={styles.lyricsGrid}>
-          
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+        <View style={styles.row}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               Being a mistress on the side{'\n'}
               It might not appeal to fools like you{'\n'}
               Creeping around on the side{'\n'}
@@ -22,8 +20,8 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               But you haven't seen my man (man){'\n'}
               You haven't seen my man (man, man){'\n'}
               You haven't seen my man (man){'\n'}
@@ -31,8 +29,8 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               He's got the fire{'\n'}
               And he walks with it{'\n'}
               He's got the fire{'\n'}
@@ -40,24 +38,21 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               His Bonnie on the side, Bonnie on the side{'\n'}
               Makes me a sad, sad girl{'\n'}
               His money on the side, money on the side{'\n'}
               Makes me a sad, sad girl
             </Text>
           </View>
-
         </View>
 
-
-        {/* --- SEGUNDA MÚSICA: Umbrella --- */}
+        {/* Umbrella */}
         <Text style={styles.songTitle}>Umbrella — Rihanna ft. JAY-Z</Text>
-        <View style={styles.lyricsGrid}>
-          
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+        <View style={styles.row}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               No clouds in my stones{'\n'}
               Let it rain, I hydroplane in the bank (eh, eh, eh){'\n'}
               Coming down with the Dow Jones{'\n'}
@@ -65,8 +60,8 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               We fly higher than weather, in G5's or better{'\n'}
               You know me{'\n'}
               In anticipation for precipitation stack chips for the rainy day (eh, eh, eh){'\n'}
@@ -75,8 +70,8 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               You have my heart{'\n'}
               And we'll never be worlds apart{'\n'}
               May be in magazines{'\n'}
@@ -84,8 +79,8 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               Baby, 'cause in the dark{'\n'}
               You can't see shiny cars{'\n'}
               And that's when you need me there{'\n'}
@@ -93,8 +88,8 @@ export default function App() {
             </Text>
           </View>
 
-          <View style={styles.verseCard}>
-            <Text style={styles.verseText}>
+          <View style={styles.card}>
+            <Text style={styles.text}>
               Because{'\n'}
               When the Sun shine, we shine together{'\n'}
               Told you I'll be here forever{'\n'}
@@ -103,8 +98,8 @@ export default function App() {
               Now that it's raining more than ever
             </Text>
           </View>
-
         </View>
+
       </ScrollView>
     </View>
   );
@@ -113,61 +108,41 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0D0E12',
+    backgroundColor: '#121214',
   },
-
   content: {
-    paddingVertical: 50,
-    paddingHorizontal: 20,
+    padding: 20,
     alignItems: 'center',
   },
-
-  mainTitle: {
-    fontSize: 36,
-    fontWeight: '900',
-    color: '#F5C518',
-    letterSpacing: 2,
-    textTransform: 'uppercase',
-    marginBottom: 40,
-    textAlign: 'center',
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#f8a72c',
+    marginVertical: 20,
   },
-
   songTitle: {
-    fontSize: 22,
-    fontWeight: '700',
-    color: '#E1E1E6',
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: '#ffffff',
     marginTop: 20,
-    marginBottom: 20,
+    marginBottom: 10,
     alignSelf: 'flex-start',
-    borderLeftWidth: 4,
-    borderLeftColor: '#F5C518',
-    paddingLeft: 10,
   },
-
-  lyricsGrid: {
+  row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    width: '100%',
-    marginBottom: 30,
   },
-
-  verseCard: {
-    backgroundColor: '#17181F',
-    borderRadius: 12,
-    padding: 18,
+  card: {
+    backgroundColor: '#1e1e24',
+    padding: 15,
     margin: 8,
-    minWidth: 260,
-    maxWidth: 320,
-    borderWidth: 1,
-    borderColor: '#262833',
+    borderRadius: 8,
+    width: 260,
   },
-
-  verseText: {
-    fontSize: 15,
-    lineHeight: 24,
-    color: '#C4C4CC',
-    textAlign: 'left',
-    fontStyle: 'italic',
+  text: {
+    color: '#c4c4cc',
+    fontSize: 14,
+    lineHeight: 20,
   },
 });
