@@ -10,9 +10,17 @@ import {
 } from "react-native";
 
 import { movies } from "../data/movies";
+import { useMovies } from "../context/MovieContext";
 
 export default function SearchScreen({ navigation }) {
   const [search, setSearch] = useState("");
+
+  const {
+    toggleFavorite,
+    isFavorite,
+    addToSetlist,
+    isInSetlist,
+  } = useMovies();
 
   const results = movies.filter((movie) =>
     movie.title
@@ -37,35 +45,67 @@ export default function SearchScreen({ navigation }) {
       <FlatList
         data={results}
         keyExtractor={(item) => String(item.id)}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <TouchableOpacity
-            style={styles.card}
-            onPress={() =>
-              navigation.navigate("Detalhes", {
-                movie: item,
-              })
-            }
-          >
-            <Image
-              source={{ uri: item.image }}
-              style={styles.poster}
-            />
+          <View style={styles.card}>
+            <TouchableOpacity
+              style={styles.movieArea}
+              onPress={() =>
+                navigation.navigate("Detalhes", {
+                  movie: item,
+                })
+              }
+            >
+              <Image
+                source={{ uri: item.image }}
+                style={styles.poster}
+              />
 
-            <View style={styles.info}>
-              <Text style={styles.movieTitle}>
-                {item.title}
-              </Text>
+              <View style={styles.info}>
+                <Text style={styles.movieTitle}>
+                  {item.title}
+                </Text>
 
-              <Text style={styles.meta}>
-                {item.year} • {item.genre}
-              </Text>
+                <Text style={styles.meta}>
+                  {item.year} • {item.genre}
+                </Text>
 
-              <Text style={styles.rating}>
-                ⭐ {item.rating}
-              </Text>
+                <Text style={styles.rating}>
+                  ⭐ {item.rating}
+                </Text>
+              </View>
+            </TouchableOpacity>
+
+            <View style={styles.actions}>
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={() => toggleFavorite(item)}
+              >
+                <Text style={styles.actionText}>
+                  {isFavorite(item.id)
+                    ? "❤️ Favorito"
+                    : "🤍 Favoritar"}
+                </Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                style={styles.actionButton}
+                onPress={() => addToSetlist(item)}
+              >
+                <Text style={styles.actionText}>
+                  {isInSetlist(item.id)
+                    ? "✓ Na Setlist"
+                    : "+ Setlist"}
+                </Text>
+              </TouchableOpacity>
             </View>
-          </TouchableOpacity>
+          </View>
         )}
+        ListEmptyComponent={
+          <Text style={styles.empty}>
+            Nenhum filme encontrado.
+          </Text>
+        }
       />
     </View>
   );
@@ -96,11 +136,14 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    flexDirection: "row",
     backgroundColor: "#111",
     borderRadius: 12,
     overflow: "hidden",
     marginBottom: 15,
+  },
+
+  movieArea: {
+    flexDirection: "row",
   },
 
   poster: {
@@ -127,5 +170,30 @@ const styles = StyleSheet.create({
 
   rating: {
     color: "#FFD700",
+  },
+
+  actions: {
+    flexDirection: "row",
+    borderTopWidth: 1,
+    borderTopColor: "#222",
+  },
+
+  actionButton: {
+    flex: 1,
+    padding: 13,
+  },
+
+  actionText: {
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 13,
+    fontWeight: "bold",
+  },
+
+  empty: {
+    color: "#777",
+    textAlign: "center",
+    marginTop: 40,
+    fontSize: 16,
   },
 });
